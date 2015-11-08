@@ -42,7 +42,7 @@ public class Cities {
 		}
     }
 
-    public static float getPercentile(HashMap<City, Float> mapping, float stats) {
+    public static float getPercentile(HashMap<City, Float> mapping, float stat) {
         int size = mapping.size();
         Object[] mapping_obj = mapping.values().toArray();
         Float[] values = Arrays.copyOf(mapping_obj, mapping_obj.length, Float[].class);
@@ -51,7 +51,7 @@ public class Cities {
         int counter = 0;
         boolean found = false;
         while (!found) {
-            if(stats > values[counter]) {
+            if(stat > values[counter]) {
                 counter++;
             }
             else {
@@ -60,4 +60,26 @@ public class Cities {
         }
         return (float) counter / size;
     }
+
+	public static float getZScore(HashMap<City, Float> mapping, float stat) {
+		int size = mapping.size();
+		Object[] mapping_obj = mapping.values().toArray();
+		Float[] values = Arrays.copyOf(mapping_obj, mapping_obj.length, Float[].class);
+		Arrays.sort(values);
+
+		float sum = 0;
+		for(float val : values){
+			sum += val;
+		}
+		float mean = sum / size;
+		float difference_squared_sum = 0;
+
+		for(float val : values) {
+			difference_squared_sum += Math.pow(val - mean, 2);
+		}
+
+		float standard_deviation = (float) Math.sqrt(difference_squared_sum / (size - 1));
+
+		return (stat - mean) / standard_deviation;
+	}
 }
