@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 
 /**
  * Main class
@@ -14,22 +15,21 @@ public class Processing {
 
     public static void main(String[] args) {
         Crimes.crimes = new ArrayList();
-
         try {
             readCrimes();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        LinkedHashSet<String> unique_crimes = new LinkedHashSet();
         Crimes.mapPrimaryDescriptions();
         Object[] primary_descriptions_obj = Crimes.primary_description_map.values().toArray();
-        Crimes primary_descriptions = new String[primary_descriptions_obj.length];
-        for(int i = 0; i < primary_descriptions.) {
-            primary_descriptions
-        }
-        Crimes.primary_descriptions = Crimes.primary_description_map.values().toArray();
-        Arrays.sort(Crimes.primary_descriptions);
+        Crimes.primary_descriptions = Arrays.copyOf(primary_descriptions_obj, primary_descriptions_obj.length, String[].class);
 
         for(String crime : Crimes.primary_descriptions) {
+            unique_crimes.add(crime);
+        }
+        for(String crime : unique_crimes) {
             System.out.println(crime);
         }
     }
