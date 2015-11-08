@@ -11,7 +11,7 @@ import java.util.LinkedHashSet;
  * Main class
  */
 public class Processing {
-    public static final String FILENAME = "C:\\Users\\admin\\Desktop\\crimedata.csv";
+    public static String FILENAME = "Crimes/crimedata.csv";
 
     public static void main(String[] args) {
         Crimes.crimes = new ArrayList();
