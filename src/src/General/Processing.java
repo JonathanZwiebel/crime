@@ -1,4 +1,4 @@
-package General;
+package general;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,7 +10,7 @@ import java.util.HashMap;
  * Main class
  */
 public class Processing {
-    public static String FILENAME = "Crimes/crimedata.csv";
+    public static String FILENAME = "src\\Crimes\\crimedata.csv";
 
     public static void main(String[] args) {
         Crimes.crimes = new ArrayList();
@@ -19,10 +19,9 @@ public class Processing {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Crimes.mapPrimaryDescriptions();
-        HashMap<String, Integer> primary_description_f = generatePrimaryDescriptionMap();
-        for(String s : primary_description_f.keySet()) {
-            System.out.println("Primary Descriptions: " + s + " | Frequency: " + primary_description_f.get(s));
+        HashMap<String, Integer> locations = generateLocationMap();
+        for(String l : locations.keySet()) {
+            System.out.println("Location: " + l + " | Frequency: " + locations.get(l));
         }
 
     }
@@ -59,6 +58,26 @@ public class Processing {
             }
             else {
                 unique.put(c.primary_description, unique.get(c.primary_description) + 1);
+            }
+        }
+        return unique;
+    }
+
+
+    /**
+     * Generates a HashMap between a unique string identifier and the frequency
+     * @return HashMap between location and their frequency
+     */
+    public static HashMap<String, Integer> generateLocationMap() {
+        HashMap<String, Integer> unique = new HashMap();
+
+
+        for(Crime c : Crimes.crimes) {
+            if(!unique.containsKey(c.location)) {
+                unique.put(c.location, 1);
+            }
+            else {
+                unique.put(c.location, unique.get(c.location) + 1);
             }
         }
         return unique;
