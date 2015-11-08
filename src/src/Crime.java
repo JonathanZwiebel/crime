@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * One crime
  */
-public class Crime {
+public class Crime implements Serializable {
     public String primary_description, secondary_description, location;
     public int beat, day, case_number;
     public boolean arrest, domestic;

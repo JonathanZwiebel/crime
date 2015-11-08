@@ -17,8 +17,6 @@ public class Processing {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        System.out.print(Crimes.crimes.get(4));
     }
 
     public static void readCrimes() throws IOException {
@@ -26,11 +24,8 @@ public class Processing {
         BufferedReader reader = new BufferedReader(file_reader);
 
         String line;
-        int counter = 1;
 
         while ((line = reader.readLine()) != null) {
-            System.out.println(counter);
-            counter++;
             String[] stats = line.split(",");
             int case_number = Integer.parseInt(stats[0].substring(2));
             int day = Integer.parseInt(stats[1].substring(stats[1].indexOf('/') + 1, stats[1].indexOf('/', 2)));
