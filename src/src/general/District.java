@@ -1,10 +1,12 @@
 package general;
 
 public class District {
-	int[] beats;
+	public int[] beats;
+	public int num;
 	
-	public District() {
+	public District(int num) {
 		beats = new int[100];
+		this.num = num;
 	}
 	
 	public void set(int index, Integer element) {

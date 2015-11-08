@@ -11,19 +11,30 @@ import java.util.HashMap;
  */
 public class Processing {
     public static String FILENAME = "Crimes/crimedata.csv";
+    //public static String FILENAME = "src\\Crimes\\crimedata.csv";
+    public static String CITY_FILENAME = "C:\\Users\\admin\\Desktop\\citycrimes.csv";
 
     public static void main(String[] args) {
         Crimes.crimes = new ArrayList();
+        Cities.cities = new ArrayList();
         try {
             readCrimes();
+            readCities();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         HashMap<String, Integer> locations = generateLocationMap();
         for(String l : locations.keySet()) {
             System.out.println("Location: " + l + " | Frequency: " + locations.get(l));
         }
         Crimes.generateDistributions();
+
+        Cities.fillMaps();
+        System.out.print(Cities.cities.get(15));
+        System.out.println();
+        float percentile = Cities.getPercentile(Cities.populationm, 4000000);
+        System.out.println("Percentile: " + percentile);
 
     }
 
@@ -42,6 +53,33 @@ public class Processing {
             int beat = Integer.parseInt(stats[7]);
 
             Crimes.crimes.add(new Crime(case_number, day, stats[2], stats[3], stats[4], arrest, domestic, beat));
+        }
+    }
+
+    public static void readCities() throws IOException {
+        FileReader file_reader = new FileReader(CITY_FILENAME);
+        BufferedReader reader = new BufferedReader(file_reader);
+
+        String line;
+
+        reader.readLine();
+        while ((line = reader.readLine()) != null) {
+            String[] stats = line.split(",");
+            String name;
+            int population, violent, murder, rape, robbery, assault, property, burglary, larceny, motor;
+            name = stats[0];
+            population = Integer.parseInt(stats[1]);
+            violent = Integer.parseInt(stats[2]);
+            murder = Integer.parseInt(stats[3]);
+            rape = Integer.parseInt(stats[4]);
+            robbery = Integer.parseInt(stats[5]);
+            assault = Integer.parseInt(stats[6]);
+            property = Integer.parseInt(stats[7]);
+            burglary = Integer.parseInt(stats[8]);
+            larceny = Integer.parseInt(stats[9]);
+            motor = Integer.parseInt(stats[10]);
+
+           Cities.cities.add(new City(name, population, violent, murder, rape, robbery, assault, property, burglary, larceny, motor));
         }
     }
 
