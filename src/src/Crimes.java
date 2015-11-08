@@ -14,6 +14,4 @@ public class Crimes {
             primary_description_map.put(c, c.primary_description);
         }
     }
-
-
 }
