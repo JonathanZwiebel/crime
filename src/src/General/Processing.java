@@ -25,8 +25,10 @@ public class Processing {
         Cities.fillMaps();
         System.out.print(Cities.cities.get(15));
         System.out.println();
-        float percentile = Cities.getPercentile(Cities.murderm, 0.0001896428571429f);
-        System.out.println("Murder Per Capita: " + percentile);
+        System.out.println("Murder Per Capita: " + Cities.getPercentile(Cities.murderm, 0.0001896428571429f));
+        System.out.println("Rape Per Capita: " + Cities.getPercentile(Cities.rapem, 0.001257142857143f));
+        System.out.println("Property Per Capita: " + Cities.getPercentile(Cities.propertym,    0.07184535714286f));
+
 
     }
 
