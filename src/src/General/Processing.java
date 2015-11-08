@@ -4,8 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashSet;
+import java.util.HashMap;
 
 /**
  * Main class
@@ -20,18 +19,12 @@ public class Processing {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        LinkedHashSet<String> unique_crimes = new LinkedHashSet();
         Crimes.mapPrimaryDescriptions();
-        Object[] primary_descriptions_obj = Crimes.primary_description_map.values().toArray();
-        Crimes.primary_descriptions = Arrays.copyOf(primary_descriptions_obj, primary_descriptions_obj.length, String[].class);
+        HashMap<String, Integer> primary_description_f = generatePrimaryDescriptionMap();
+        for(String s : primary_description_f.keySet()) {
+            System.out.println("Primary Descriptions: " + s + " | Frequency: " + primary_description_f.get(s));
+        }
 
-        for(String crime : Crimes.primary_descriptions) {
-            unique_crimes.add(crime);
-        }
-        for(String crime : unique_crimes) {
-            System.out.println(crime);
-        }
     }
 
     public static void readCrimes() throws IOException {
@@ -50,5 +43,24 @@ public class Processing {
 
             Crimes.crimes.add(new Crime(case_number, day, stats[2], stats[3], stats[4], arrest, domestic, beat));
         }
+    }
+
+    /**
+     * Generates a HashMap between a unique string identifier and the frequency
+     * @return HashMap between primary_descriptions and their frequency
+     */
+    public static HashMap<String, Integer> generatePrimaryDescriptionMap() {
+        HashMap<String, Integer> unique = new HashMap();
+
+
+        for(Crime c : Crimes.crimes) {
+            if(!unique.containsKey(c.primary_description)) {
+                unique.put(c.primary_description, 1);
+            }
+            else {
+                unique.put(c.primary_description, unique.get(c.primary_description) + 1);
+            }
+        }
+        return unique;
     }
 }
