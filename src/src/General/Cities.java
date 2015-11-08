@@ -39,7 +39,7 @@ public class Cities {
 		}
     }
 
-    public static double getPercentile(HashMap<City, Integer> mapping, int stats) {
+    public static float getPercentile(HashMap<City, Integer> mapping, int stats) {
         int size = mapping.size();
         Object[] mapping_obj = mapping.values().toArray();
         Integer[] values = Arrays.copyOf(mapping_obj, mapping_obj.length, Integer[].class);
@@ -55,6 +55,6 @@ public class Cities {
                 found = true;
             }
         }
-        return counter / size;
+        return (float) counter / size;
     }
 }
