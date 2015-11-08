@@ -1,4 +1,4 @@
-package general;
+package General;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,7 +10,7 @@ import java.util.HashMap;
  * Main class
  */
 public class Processing {
-    public static final String FILENAME = "C:\\Users\\admin\\Desktop\\crimedata.csv";
+    public static String FILENAME = "Crimes/crimedata.csv";
 
     public static void main(String[] args) {
         Crimes.crimes = new ArrayList();
