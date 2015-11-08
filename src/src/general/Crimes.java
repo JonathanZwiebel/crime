@@ -52,5 +52,6 @@ public class Crimes {
     	for(int i = 0; i < sorted_districts.size(); i ++) {
     		System.out.println("District " + sorted_districts.get(i).num + ": " + sorted_districts.get(i).getTotal());
     	}
+    	System.out.println();
     }
 }
