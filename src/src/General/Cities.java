@@ -10,39 +10,42 @@ import java.util.HashMap;
 public class Cities {
     public static ArrayList<City> cities;
     public static HashMap<City, String> namem = new HashMap<City, String>();
-	public static HashMap<City, Integer> populationm = new HashMap<City, Integer>();
-	public static HashMap<City, Integer> violentm = new HashMap<City, Integer>();
-	public static HashMap<City, Integer> murderm = new HashMap<City, Integer>();
-	public static HashMap<City, Integer> rapem = new HashMap<City, Integer>();
-	public static HashMap<City, Integer> robberym = new HashMap<City, Integer>();
-	public static HashMap<City, Integer> assaultm = new HashMap<City, Integer>();
-	public static HashMap<City, Integer> propertym = new HashMap<City, Integer>();
-	public static HashMap<City, Integer> burglarym = new HashMap<City, Integer>();
-	public static HashMap<City, Integer> larcenym = new HashMap<City, Integer>();
-	public static HashMap<City, Integer> motorm = new HashMap<City, Integer>();
+	public static HashMap<City, Float> populationm = new HashMap<City, Float>();
+
+    // PER CAPITA
+	public static HashMap<City, Float> violentm = new HashMap<City, Float>();
+	public static HashMap<City, Float> murderm = new HashMap<City, Float>();
+	public static HashMap<City, Float> rapem = new HashMap<City, Float>();
+	public static HashMap<City, Float> robberym = new HashMap<City, Float>();
+	public static HashMap<City, Float> assaultm = new HashMap<City, Float>();
+	public static HashMap<City, Float> propertym = new HashMap<City, Float>();
+	public static HashMap<City, Float> burglarym = new HashMap<City, Float>();
+	public static HashMap<City, Float> larcenym = new HashMap<City, Float>();
+	public static HashMap<City, Float> motorm = new HashMap<City, Float>();
 
 
 
 	public static void fillMaps() {
     	for(City c : cities) {
 			namem.put(c, c.name);
-			populationm.put(c, c.population);
-			violentm.put(c, c.violent_crime);
-			murderm.put(c, c.murder);
-			rapem.put(c, c.rape);
-			robberym.put(c, c.robbery);
-			assaultm.put(c, c.assault);
-			propertym.put(c, c.property);
-			burglarym.put(c, c.burglary);
-			larcenym.put(c, c.larceny);
-			motorm.put(c, c.motor);
+            float pop = c.population;
+			populationm.put(c, pop);
+			violentm.put(c, c.violent_crime / pop);
+			murderm.put(c, c.murder / pop);
+			rapem.put(c, c.rape / pop);
+			robberym.put(c, c.robbery / pop);
+			assaultm.put(c, c.assault / pop);
+			propertym.put(c, c.property / pop);
+			burglarym.put(c, c.burglary / pop);
+			larcenym.put(c, c.larceny / pop);
+			motorm.put(c, c.motor / pop);
 		}
     }
 
-    public static float getPercentile(HashMap<City, Integer> mapping, int stats) {
+    public static float getPercentile(HashMap<City, Float> mapping, float stats) {
         int size = mapping.size();
         Object[] mapping_obj = mapping.values().toArray();
-        Integer[] values = Arrays.copyOf(mapping_obj, mapping_obj.length, Integer[].class);
+        Float[] values = Arrays.copyOf(mapping_obj, mapping_obj.length, Float[].class);
         Arrays.sort(values);
 
         int counter = 0;
