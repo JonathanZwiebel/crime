@@ -10,7 +10,7 @@ import java.util.HashMap;
  * Main class
  */
 public class Processing {
-    public static String FILENAME = "src\\Crimes\\crimedata.csv";
+    public static String FILENAME = "Crimes/crimedata.csv";
 
     public static void main(String[] args) {
         Crimes.crimes = new ArrayList();
@@ -23,6 +23,7 @@ public class Processing {
         for(String l : locations.keySet()) {
             System.out.println("Location: " + l + " | Frequency: " + locations.get(l));
         }
+        Crimes.generateDistributions();
 
     }
 

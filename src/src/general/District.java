@@ -1,20 +1,18 @@
 package general;
 
-import java.util.ArrayList;
-
 public class District {
-	ArrayList<Integer> beats;
+	int[] beats;
 	
 	public District() {
-		beats = new ArrayList<Integer>(100);
+		beats = new int[100];
 	}
 	
 	public void set(int index, Integer element) {
-		beats.set(index, element);
+		beats[index] = element;
 	}
 	
 	public Integer get(int index) {
-		return beats.get(index);
+		return beats[index];
 	}
 	
 	public Integer getTotal() {
